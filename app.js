@@ -102,7 +102,7 @@ function timer() {
   setClock("#birthday__timer", deadline)
 }
 
-getDate.addEventListener("keyup", (e) => {
+getDate.addEventListener("input", (e) => {
   let target = e.target.value.trim()
   let length = target.length
 
