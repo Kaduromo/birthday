@@ -1,0 +1,87 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat:regular,500,700&display=swap);
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Montserrat, sans-serif;
+}
+
+#birthday {
+  min-height: 100vh;
+  min-width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: radial-gradient(
+    circle at 16.06% 52.97%,
+    #ff67f8 0,
+    #ff55f7 25%,
+    #f23cf2 50%,
+    #c825ed 75%,
+    #9f1fec 100%
+  );
+}
+#birthday__container {
+  padding: 30px;
+  text-align: center;
+}
+#birthday__title {
+  font-size: 28px;
+  margin-bottom: 30px;
+}
+#birthday__text,
+#birthday__subtext {
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+#birthday__subtext {
+  margin-bottom: 30px;
+}
+#birthday__body {
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 20px;
+}
+#birthday__date,
+#birthday__btn,
+#birthday__clear {
+  text-align: center;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  padding: 8px;
+  width: 100%;
+  font-size: 17px;
+  font-weight: 700;
+}
+#birthday__btn {
+  background: rgb(18, 255, 18);
+}
+#birthday__clear {
+  background: rgb(255, 28, 28);
+  color: #fff;
+}
+#birthday__timer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+#birthday__timer > div {
+  font-size: 20px;
+  color: #000;
+  font-weight: 500;
+  font-style: italic;
+}
+@media (max-width: 767.98px) {
+  #birthday__body,
+  #birthday__timer {
+    flex-wrap: wrap;
+  }
+}
