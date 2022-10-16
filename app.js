@@ -34,7 +34,6 @@ const subtext = document.getElementById("birthday__subtext")
 btnClearDate.style = "display:none"
 
 let deadline = new Date()
-timer()
 
 function timer() {
   function getTimeRemaining(endtime) {
@@ -113,8 +112,31 @@ getDate.addEventListener("input", (e) => {
   const date = `${year}. ${month}. ${day}`
 
   if (length === 10) {
-    localStorage.setItem("deadline", date)
-    deadline = new Date(date)
+    if (Date.parse(date) < Date.parse(new Date())) {
+      const todayMonth =
+        new Date().getMonth() + 1 != 11
+          ? new Date().getMonth() + 1
+          : `0${new Date().getMonth()}`
+
+      const todayDate =
+        new Date().getDate() + 1 != 11
+          ? new Date().getDate()
+          : `0${new Date().getDate()}`
+
+      const todayFullYear = new Date().getFullYear()
+      const today = `${todayDate}.${todayMonth}.${todayFullYear}`
+
+      alert(`Указанная дата меньше ${today}`)
+      closeBtnClear()
+    } else {
+      btnTimerDate.addEventListener("click", () => {
+        timer()
+        openBtnClear()
+      })
+      localStorage.setItem("deadline", date)
+
+      deadline = new Date(date)
+    }
   }
 })
 
@@ -143,11 +165,6 @@ getDate.addEventListener("keyup", (e) => {
   }
 
   if (length === 10) {
-    btnTimerDate.addEventListener("click", () => {
-      timer()
-      openBtnClear()
-    })
-
     if (e.key === "Enter") {
       timer()
       openBtnClear()
@@ -186,6 +203,7 @@ btnTimerDate.addEventListener("click", () => {
     alert(
       `Дата рождения не была введена, в качестве даты будет указано '${data}'`
     )
+
     subtext.innerHTML = `До '${data}' осталось:`
 
     timer()
