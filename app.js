@@ -106,8 +106,24 @@ getDate.addEventListener("input", (e) => {
   let target = e.target.value.trim()
   let length = target.length
 
+  const day = target.substring(0, 2)
+  const month = target.substring(3, 5)
+  const year = target.substring(6, 10)
+
+  const date = `${year}. ${month}. ${day}`
+
+  if (length === 10) {
+    localStorage.setItem("deadline", date)
+    deadline = new Date(date)
+  }
+})
+
+getDate.addEventListener("keyup", (e) => {
+  let target = e.target.value.trim()
+  let length = target.length
+
   if (e.key === "Backspace") {
-    target = target[length] = ""
+    target = ""
   }
 
   if (target[0] + target[1] > 31) {
@@ -126,16 +142,6 @@ getDate.addEventListener("input", (e) => {
     getDate.value = `${target}.`
   }
 
-  const day = target.substring(0, 2)
-  const month = target.substring(3, 5)
-  const year = target.substring(6, 10)
-
-  const date = `${year}. ${month}. ${day}`
-
-  localStorage.setItem("deadline", date)
-
-  deadline = new Date(date)
-
   if (length === 10) {
     btnTimerDate.addEventListener("click", () => {
       timer()
@@ -147,9 +153,17 @@ getDate.addEventListener("input", (e) => {
       openBtnClear()
     }
   }
+
+  if (length < 10 && e.key === "Enter") {
+    alert("Дата указана неверно. Введите дату в формате дд.мм.гггг")
+  }
 })
 
 btnTimerDate.addEventListener("click", () => {
+  if (getDate.value != "" && getDate.value.length < 10) {
+    alert("Дата указана неверно. Введите дату в формате дд.мм.гггг")
+  }
+
   if (getDate.value === "") {
     deadline = new Date(
       new Date().getFullYear(),
